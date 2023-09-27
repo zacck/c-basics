@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 int main(void) {
+
   int lower;
   int upper;
 
@@ -22,9 +23,8 @@ int main(void) {
     return 1;
   }
 
-  while (lower <= upper) {
-    printf("Number i is: %4d\n", lower);
-    lower++;
+  for (; lower <= upper; lower++) {
+    printf("The current number is: %d\n", lower);
   }
 
   return 0;
