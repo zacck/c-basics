@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main(void) {
-  uint32_t size;
+  int size;
 
   printf("Enter the size of your pyramid: ");
 
@@ -11,8 +11,13 @@ int main(void) {
     return 1;
   }
 
-  for (int i = 1; i <= size; i++) {
-    int current = i;
+  if (size < 1) {
+    printf("\nInvalid input, Exiting!\n");
+    return 1;
+  }
+
+  for (uint32_t i = 1; i <= size; i++) {
+    uint32_t current = i;
     while (current > 0)
       printf("%4d", current--);
     printf("\n");
