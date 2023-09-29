@@ -2,14 +2,14 @@
 #include <stdio.h>
 
 struct Packet {
-  uint8_t addr_mode;
-  uint8_t short_addr;
-  uint8_t long_addr;
-  uint8_t sensor;
-  uint8_t bat;
-  uint16_t payload;
-  uint8_t status;
-  uint8_t crc;
+  uint32_t addr_mode : 1;
+  uint32_t short_addr : 2;
+  uint32_t long_addr : 8;
+  uint32_t sensor : 3;
+  uint32_t bat : 3;
+  uint32_t payload : 12;
+  uint32_t status : 1;
+  uint32_t crc : 2;
 };
 
 int main(void) {
