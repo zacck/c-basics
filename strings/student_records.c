@@ -25,6 +25,23 @@ int main(void) {
     printf("Invalid Option \n");
     display_menu();
   }
+  switch (menu_option) {
+  case 1:
+    printf("opt1");
+    break;
+  case 2:
+    printf("opt2");
+    break;
+  case 3:
+    printf("opt3");
+    break;
+  case 4:
+    printf("opt4");
+    break;
+  default:
+    printf("Invalid Option \n");
+    display_menu();
+  }
 
   return 0;
 }
