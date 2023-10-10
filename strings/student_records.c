@@ -5,6 +5,7 @@
 void display_menu(void);
 void display_records(void);
 void add_new_record(void);
+void delete_record(void);
 
 typedef struct {
   uint32_t rollNumber;
@@ -35,7 +36,7 @@ int main(void) {
       add_new_record();
       break;
     case 3:
-      printf("opt3");
+      delete_record();
       break;
     case 4:
       printf("Exiting \n");
@@ -48,10 +49,29 @@ int main(void) {
   }
 }
 
-void delete_record(void) {}
+void delete_record(void) {
+  uint32_t deleteRoll;
+  uint32_t deleted = 0;
+  printf("Enter Rollnumber to Delete:");
+  scanf("%d", &deleteRoll);
+  // find roll and delete
+  for (int i = 0; i < 10; i++) {
+    if (student_list[i].rollNumber == deleteRoll) {
+      student_list[i].rollNumber = 0;
+      deleted++;
+      break;
+    }
+  }
+
+  if (deleted == 0)
+    printf("Could not find record to delete\n");
+  menu_option = 0;
+  display_menu();
+}
 
 void add_new_record(void) {
   Student_t new_student;
+  uint32_t rolls[10];
   int free_index;
   // find first 0 roll number
   for (int i = 0; i < 10; i++) {
@@ -72,6 +92,16 @@ void add_new_record(void) {
   printf("\nEnter name:");
   scanf("\n%[^\n]s", new_student.studentName);
 
+  // check if rollnumber is valid
+  for (int i = 0; i < 10; i++) {
+    if (student_list[i].rollNumber == new_student.rollNumber) {
+      printf("Invalid Roll number, choose another");
+      menu_option = 0;
+      display_menu();
+      return;
+    }
+  }
+
   student_list[free_index] = new_student;
   menu_option = 0;
   display_menu();
@@ -84,7 +114,6 @@ void display_records(void) {
   }
   if (isEmpty) {
     printf("There are no records to display\n");
-    display_menu();
   } else {
     for (int i = 0; i < 10; i++) {
       if (student_list[i].rollNumber != 0) {
@@ -103,7 +132,7 @@ void display_records(void) {
 }
 
 void display_menu(void) {
-  printf("Display all records -->1\n");
+  printf("\nDisplay all records -->1\n");
   printf("Add new Record      -->2\n");
   printf("Delete a Record     -->3\n");
   printf("Exit Application    -->4\n");
